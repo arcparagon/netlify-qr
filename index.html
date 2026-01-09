@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Donasi Masuk</title>
+</head>
+<body>
+<h2>🙏 Donatur</h2>
+<ul id="list"></ul>
+
+<script>
+async function load() {
+  const res = await fetch('/.netlify/functions/get-donations');
+  const data = await res.json();
+  document.getElementById('list').innerHTML =
+    data.map(d => `<li>${d.name} - Rp${d.amount}</li>`).join('');
+}
+setInterval(load, 3000);
+load();
+</script>
+</body>
+</html>
